@@ -1,19 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <md-app>
+      <md-app-toolbar class="md-primary">
+        <span class="md-title">{{ appTitle }}</span>
+      </md-app-toolbar>
+      <md-app-content>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+      </md-app-content>
+    </md-app>
+    <md-bottom-bar md-sync-route>
+      <md-bottom-bar-item to="/alarms" md-label="Alarms" md-icon="alarm">
+      </md-bottom-bar-item>
+      <md-bottom-bar-item to="/tasks" md-label="Tasks" md-icon="list">
+      </md-bottom-bar-item>
+      <md-bottom-bar-item to="/search" md-label="Search" md-icon="search">
+      </md-bottom-bar-item>
+    </md-bottom-bar>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data: function() {
+    return {
+      appTitle: 'Routes'
+    };
   }
-}
+};
 </script>
 
 <style>
@@ -23,6 +37,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+}
+
+md-app {
+  height: 100vh;
 }
 </style>
