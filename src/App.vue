@@ -6,15 +6,13 @@
       </md-app-toolbar>
       <md-app-content>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
       </md-app-content>
     </md-app>
-    <md-bottom-bar md-sync-route>
-      <md-bottom-bar-item to="/alarms" md-label="Alarms" md-icon="alarm">
-      </md-bottom-bar-item>
-      <md-bottom-bar-item to="/tasks" md-label="Tasks" md-icon="list">
-      </md-bottom-bar-item>
-      <md-bottom-bar-item to="/search" md-label="Search" md-icon="search">
-      </md-bottom-bar-item>
+    <md-bottom-bar md-sync-route class="md-primary" >
+      <md-bottom-bar-item to="/alarms" md-label="Home" md-icon="home"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/tasks" md-label="Tasks" md-icon="list"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/search" md-label="Search" md-icon="search"> </md-bottom-bar-item>
     </md-bottom-bar>
   </div>
 </template>
@@ -38,9 +36,20 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
+  background-color: white;
 }
 
-md-app {
-  height: 100vh;
+.md-app {
+  /* height: 100vh; */
+  padding-bottom: 56px;
+}
+
+.md-bottom-bar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}
+.md-bottom-bar>.md-ripple {
+  justify-content: center;
 }
 </style>
