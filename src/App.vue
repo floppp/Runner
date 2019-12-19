@@ -7,17 +7,20 @@
       <md-app-content>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
     <md-bottom-bar md-sync-route class="md-primary" >
-      <md-bottom-bar-item to="/alarms" md-label="Home" md-icon="home"> </md-bottom-bar-item>
-      <md-bottom-bar-item to="/tasks" md-label="Tasks" md-icon="list"> </md-bottom-bar-item>
-      <md-bottom-bar-item to="/search" md-label="Search" md-icon="search"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/home" md-label="Home" md-icon="home"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/routes" md-label="Routes" md-icon="list"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/map" md-label="Map" md-icon="search"> </md-bottom-bar-item>
     </md-bottom-bar>
   </div>
 </template>
 
 <script>
+
+
 export default {
   name: 'app',
   data: function() {

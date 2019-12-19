@@ -1,16 +1,17 @@
 <template>
   <div class="page-container">
-    <p>En home</p>
 
   </div>
 </template>
 
+
 <script>
-export default {
-  props: ['title']
-}
+  export default {
+
+  }
 </script>
 
-<style lang="stylus" scoped>
+
+<style lang="stylus">
 
 </style>
