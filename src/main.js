@@ -1,27 +1,28 @@
-import Vue from 'vue';
-import App from './App.vue';
-import VueRouter from 'vue-router';
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-import 'vue-material/dist/theme/default.css'
+import Vue           from 'vue';
+import App           from './App.vue';
+import VueRouter     from 'vue-router';
+import VueMaterial   from 'vue-material'
+import Home          from './components/Home';
+import Routes        from './components/Routes';
+import HistoricMap   from './components/HistoricMap';
+import RealTimeRoute from './components/RealTimeRoute';
+import 'vue-material/dist/vue-material.min.css';
+import 'vue-material/dist/theme/default.css';
 
 Vue.use(VueMaterial);
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
 
-import Home from './components/Home';
-import Routes from './components/Routes';
-import HistoricMap from './components/HistoricMap';
 
 const routes = [
-  { path: '/home',   component: Home },
-  { path: '/routes', component: Routes },
-  { path: '/map',    component: HistoricMap },
+  { path: '/home',          component: Home },
+  { path: '/realtimeroute', component: RealTimeRoute },
+  { path: '/routes',        component: Routes },
+  { path: '/map',           component: HistoricMap },
+  { path: '/*',             component: Home },
 ];
 
-const router = new VueRouter({
-  routes // short for `routes: routes`
-})
+const router = new VueRouter({ routes });
 
 new Vue({
   router: router,
