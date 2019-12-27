@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <md-app>
+    <md-app md-mode="fixed">
       <md-app-toolbar class="md-primary">
         <md-button v-if="!isMainPageShown"
                    class="md-icon-button"
@@ -82,8 +82,13 @@
 
   .md-app {
     min-height: 100vh;
+    max-height: 100vh;
   }
 
+  .md-app-content {
+    margin-bottom: 56px;
+  }
+  
   .md-title {
     transition: 0.4s;
   }

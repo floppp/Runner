@@ -38,13 +38,14 @@
                       md-input-maxlength="30"
                       md-input-placeholder="Título de la ruta"
                       md-confirm-text="Aceptar"
-                      md-cancel-text="Cancelear"
+                      md-cancel-text="Cancelar"
                       @md-confirm="onDialogConfirmClicked" />
   </div>
 </template>
 
 
 <script>
+  // TODO: Crear un componente para mostrar la información al reutilizarse luego en las tarjetas de Routes.
   import APP_STATE     from '../models/state';
   import GoogleMapsApi from '../models/GoogleMapsApi';
   import mapsModule    from '../models/maps_module';
@@ -189,7 +190,19 @@
 
       onDialogConfirmClicked() {
         const id = APP_STATE.routes.length > 0 ? Math.max(...APP_STATE.routes.map(route => route.id)) + 1 : 0;
-        APP_STATE.routes.push(new Route(id, this.route, this.title));
+        const len = this.route.length;
+
+        APP_STATE.routes.push(new Route(
+            id,
+            this.route,
+            this.title,
+            this.diff,
+            window.google.maps.geometry.spherical.computeDistanceBetween(
+              new window.google.maps.LatLng(this.route[len-1].lat, this.route[len-1].lng),
+              new window.google.maps.LatLng(this.route[0].lat, this.route[0].lng)
+            )
+          )
+        );
         localStorage.setItem('routes', JSON.stringify(APP_STATE.routes));
 
         this.$emit('hide-bar', true)

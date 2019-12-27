@@ -21,6 +21,9 @@
           yAxis: {
             type: "value"
           },
+          tooltip: {
+
+          },
           series: [
             {
               type: "line",
@@ -35,7 +38,7 @@
     },
 
     mounted() {
-      this.route = APP_STATE.routes[+this.$route.params.id];
+      this.route = APP_STATE.routes.filter(r => r.id === +this.$route.params.id)[0];
       this.title = this.route.title;
     }
   }

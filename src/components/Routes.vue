@@ -6,7 +6,8 @@
            :data="route"
            v-on:hide-bar="$emit('hide-bar', $event)"
            v-on:hide-bar-details="$emit('hide-bar-details', $event)"
-           v-on:delete-route="deleteRoute($event)"></route>
+           v-on:delete-route="deleteRoute($event)"
+           v-on:save-localstorage="saveLocalStorage"></route>
   </div>
 </template>
 
@@ -28,10 +29,14 @@
 
     methods: {
       deleteRoute(routeId) {
-        // Tal como está ahora esto no hace falta, id === idx, pero por si acaso cambia en un
-        // futuro y no tienen porqué ser iguales.
+        // Tal como está ahora esto no hace falta porque id === idx, pero por si acaso
+        // cambia en un futuro y no tienen porqué ser iguales.
         const idx = APP_STATE.routes.indexOf(APP_STATE.routes.filter(r => r.id === routeId)[0]);
         APP_STATE.routes.splice(idx, 1);
+        this.saveLocalStorage();
+      },
+
+      saveLocalStorage() {
         localStorage.setItem('routes', JSON.stringify(APP_STATE.routes));
       }
     }
