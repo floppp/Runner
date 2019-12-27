@@ -5,7 +5,8 @@
         <md-button v-if="!isMainPageShown"
                    class="md-icon-button"
                    @click="onHomeClicked">
-          <md-icon>home</md-icon>
+          <md-icon>keyboard_arrow_left</md-icon>
+          <!-- <md-icon v-else-if="isShownDetails">satellite</md-icon> -->
         </md-button>
         <span class="md-title">{{ appTitle }}</span>
       </md-app-toolbar>
@@ -16,42 +17,59 @@
                             md-confirm-text="Confirmar"
                             md-cancel-text="Cancelear"
                             @md-confirm="onConfirm" />
-        <router-view v-on:hide-bar="isMainPageShown = $event"></router-view>
+        <router-view v-on:hide-bar="isMainPageShown = $event"
+                     v-on:hide-bar-details="isShownDetails = $event" ></router-view>
       </md-app-content>
     </md-app>
     <md-bottom-bar v-if="isMainPageShown" md-sync-route class="md-primary" >
-      <md-bottom-bar-item to="/home" md-label="Home" md-icon="home"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/home"   md-label="Home"   md-icon="home"> </md-bottom-bar-item>
       <md-bottom-bar-item to="/routes" md-label="Routes" md-icon="list"> </md-bottom-bar-item>
-      <md-bottom-bar-item to="/map" md-label="Map" md-icon="search"> </md-bottom-bar-item>
+      <md-bottom-bar-item to="/map"    md-label="Map"    md-icon="satellite"> </md-bottom-bar-item>
     </md-bottom-bar>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data: function() {
-    return {
-      appTitle: 'Routes',
-      isMainPageShown: true,
-      dialogActive: false
-    };
-  },
+  import APP_STATE     from './models/state';
 
-  methods: {
-    onHomeClicked() {
-      this.dialogActive = true;
+  export default {
+    name: 'app',
+
+    data() {
+      return {
+        appTitle: 'Routes',
+        isMainPageShown: true,
+        isShownDetails: false,
+        dialogActive: false
+      };
     },
 
-    onConfirm() {
-      this.$router.push('home'); 
-      this.isMainPageShown = true
+    mounted() {
+      if (localStorage.getItem('routes')) {
+        console.log('recuperando datos de localStorage');
+        APP_STATE.routes = JSON.parse(localStorage.getItem('routes'));
+      }
+    },
+
+    methods: {
+      onHomeClicked() {
+        if (!this.isShownDetails) {
+          this.dialogActive = true;
+        } else {
+          this.onConfirm();
+        }
+      },
+
+      onConfirm() {
+        this.$router.go(-1);
+        this.isMainPageShown = true;
+        this.isShownDetails  = false;
+      }
     }
-  }
-};
+  };
 </script>
 
-<style lang="css">
+<style>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -60,6 +78,10 @@ export default {
     color: #2c3e50;
     height: 100vh;
     background-color: white;
+  }
+
+  .md-app {
+    min-height: 100vh;
   }
 
   .md-title {

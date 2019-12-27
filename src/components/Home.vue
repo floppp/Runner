@@ -22,6 +22,7 @@
     mounted() {
       const mapDom = document.querySelector('#home-map');
       const gmapApi = new GoogleMapsApi('AIzaSyDo2f1x-MdrQspt7wKfElzB6XIlsTXWZiw');
+
       gmapApi.load().then(() => {
         const mapEl = mapsModule.renderMap(mapDom, {lat: 40, lng: -1});
         this.id = navigator.geolocation.watchPosition(

@@ -1,17 +1,60 @@
 <template>
-  <div class="page-container">
+  <div id="details-container" class="page-container">
+    <div id="details-title"> {{ title }} </div>
 
+    <echart :options="chartOptions"></echart>
   </div>
 </template>
 
 
 <script>
-  export default {
+  import APP_STATE     from '../models/state';
 
+
+  export default {
+    data() {
+      return {
+        chartOptions: {
+          xAxis: {
+            data: ["Q1", "Q2", "Q3", "Q4"]
+          },
+          yAxis: {
+            type: "value"
+          },
+          series: [
+            {
+              type: "line",
+              data: [63, 75, 24, 92]
+            }
+          ],
+          color: ["#127ac2"]
+        },
+        route: {},
+        title: '',
+      }
+    },
+
+    mounted() {
+      this.route = APP_STATE.routes[+this.$route.params.id];
+      this.title = this.route.title;
+    }
   }
 </script>
 
 
-<style lang="stylus">
+<style>
+  #details-container {
+    width: 100%;
+    height: 300px;
+  }
 
+  .echarts {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .echarts > canvas {
+    width: 100% !important;
+    /* height: 100% !important; */
+  }
 </style>

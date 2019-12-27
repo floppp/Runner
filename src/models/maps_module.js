@@ -1,11 +1,11 @@
 const mapsModule = (function() {
   return {
-    renderMap: function(mapDom, position) {
+    renderMap: function(mapDom, position, zoom=10) {
       const options = {
         center          : position,
         disableDefaultUI: true,
         mapTypeId       : window.google.maps.MapTypeId.ROADMAP,
-        zoom            : 10,
+        zoom            : zoom,
       }
       
       const map = new window.google.maps.Map(mapDom, options);

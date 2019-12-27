@@ -26,8 +26,7 @@
       </md-speed-dial-target>
 
       <md-speed-dial-content>
-        <md-button class="md-icon-button green-background"
-                   @click="onDoneClicked">
+        <md-button class="md-icon-button green-background" @click="onDoneClicked">
           <md-icon class="green-background">done</md-icon>
         </md-button>
       </md-speed-dial-content>
@@ -52,13 +51,14 @@
   import Position      from '../models/position';
   import Route         from '../models/route';
 
+
   export default {
     currentMarker: {},
-    polyline     : {},
-    id           : -1,
     diff         : 1,
+    id           : -1,
+    polyline     : {},
 
-    // No tengo claro porqué he de definir route de la forma particular de Vue. Si defino arriba, problemas
+    // No tengo claro porqué he de definir route de la forma reactiva de Vue. Si defino arriba, problemas
     // por undefined. He buscado pero no he encontrado la razón.
     data() {
       return {
@@ -116,7 +116,7 @@
 
     methods: {
       /**
-       * Actualización de los valoes de distancia y de velocidad a partir de las posiciones.
+       * Actualización de los valores de distancia y de velocidad a partir de las posiciones.
        */
       updateInfoPanels: function() {
         const len = this.route.length;
@@ -188,7 +188,10 @@
       },
 
       onDialogConfirmClicked() {
-        APP_STATE.routes.push(new Route(this.route, this.title));
+        const id = APP_STATE.routes.length > 0 ? Math.max(...APP_STATE.routes.map(route => route.id)) + 1 : 0;
+        APP_STATE.routes.push(new Route(id, this.route, this.title));
+        localStorage.setItem('routes', JSON.stringify(APP_STATE.routes));
+
         this.$emit('hide-bar', true)
         this.$router.push('routes'); 
       }
