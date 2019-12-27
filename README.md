@@ -1,24 +1,2 @@
-# my-routes
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Google Maps
+Para todo el tema de GoogleMaps hay algún que otro (paquete)[https://github.com/xkjyeah/vue-google-maps] con bastante tracción. De todas formas, he preferido hacerlo todo por mí mismo, eso sí, basándome en alguna clase bastante bien planteada.
