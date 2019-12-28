@@ -54,9 +54,11 @@
 
   export default {
     name: 'Route',
+
     components: {
       'route-info': RouteInfo
     },
+    
     props: ['data'],
 
     data() {

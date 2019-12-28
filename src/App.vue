@@ -30,7 +30,8 @@
 </template>
 
 <script>
-  import APP_STATE     from './models/state';
+  import APP_STATE from './models/state';
+
 
   export default {
     name: 'app',
@@ -85,10 +86,10 @@
     max-height: 100vh;
   }
 
-  .md-app-content {
+  /* .md-app-content {
     margin-bottom: 56px;
-  }
-  
+  } */
+
   .md-title {
     transition: 0.4s;
   }

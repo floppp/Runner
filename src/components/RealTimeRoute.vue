@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">
+  <div id="realtime-container" class="page-container">
     <div id="rt-info-panel">
       <div id="rt-time-info" class="rt-display">
         <div class="rt-info-title">Tiempo</div>
@@ -45,7 +45,6 @@
 
 
 <script>
-  // TODO: Crear un componente para mostrar la información al reutilizarse luego en las tarjetas de Routes.
   import APP_STATE     from '../models/state';
   import GoogleMapsApi from '../models/GoogleMapsApi';
   import mapsModule    from '../models/maps_module';
@@ -85,19 +84,14 @@
           geodesic     : true,
           map          : mapEl,
           path         : [],
-          strokeColor  : '#0000FF',
-          strokeOpacity: 1.0,
+          strokeColor  : '#FF0000',
+          strokeOpacity: 0.8,
           strokeWeight : 2,
         });
 
         this.id = navigator.geolocation.watchPosition(
           position => {
-            const pos = new Position(
-              position.coords.latitude,
-              position.coords.longitude,
-              position.coords.altitude,
-              position.coords.speed,
-            );
+            const pos = this.getPosition(position);
             this.route.push(pos);
             this.updatePosition(mapEl, pos);
             this.updateInfoPanels();
@@ -116,6 +110,24 @@
     },
 
     methods: {
+      getPosition(position) {
+        const pos = new Position(
+          position.coords.latitude,
+          position.coords.longitude,
+          position.coords.altitude,
+          position.coords.speed,
+        );
+        if (this.route.length) {
+          const lastPos = this.route.slice(-1)[0];
+          pos.setDistance(lastPos);
+          pos.setSpeedAndPace(this.diff);
+        } else {
+          this.route.length;
+        }
+
+        return pos;
+      },
+
       /**
        * Actualización de los valores de distancia y de velocidad a partir de las posiciones.
        */
@@ -123,10 +135,7 @@
         const len = this.route.length;
 
         if (len > 2) {
-          const distance = window.google.maps.geometry.spherical.computeDistanceBetween(
-            new window.google.maps.LatLng(this.route[len-1].lat, this.route[len-1].lng),
-            new window.google.maps.LatLng(this.route[0].lat, this.route[0].lng)
-          );
+          const distance = this.route.reduce((acc, c) => acc + c.distance, 0);
           document.querySelector('#rt-distance').innerHTML = `${(distance).toFixed(2)} m`;
           const kmh = distance / this.diff * 1000 * 3.6;
           document.querySelector('#rt-velocity').innerHTML = `${(kmh).toFixed(2)} km/h`;
@@ -189,18 +198,14 @@
       },
 
       onDialogConfirmClicked() {
-        const id = APP_STATE.routes.length > 0 ? Math.max(...APP_STATE.routes.map(route => route.id)) + 1 : 0;
+        const nextId = APP_STATE.routes.length > 0 ? Math.max(...APP_STATE.routes.map(route => route.id)) + 1 : 0;
         const len = this.route.length;
 
         APP_STATE.routes.push(new Route(
-            id,
+            nextId,
             this.route,
             this.title,
-            this.diff,
-            window.google.maps.geometry.spherical.computeDistanceBetween(
-              new window.google.maps.LatLng(this.route[len-1].lat, this.route[len-1].lng),
-              new window.google.maps.LatLng(this.route[0].lat, this.route[0].lng)
-            )
+            this.diff
           )
         );
         localStorage.setItem('routes', JSON.stringify(APP_STATE.routes));
@@ -214,6 +219,12 @@
 
 
 <style>
+  #realtime-container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+  }
+
   #rt-info-panel {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -223,6 +234,7 @@
     grid-column: span 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 
   .rt-info-title {
@@ -236,8 +248,8 @@
     margin-bottom: 1em;
   }
 
-  .map {
-    height: 600px;
+  #real-time-map {
+    grid-row: span 5;
   }
 
   .md-bottom-right {

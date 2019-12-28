@@ -1,6 +1,10 @@
 <template>
-  <div class="page-container">
+  <div id="historic-container" class="page-container">
 
+    <div id="historic-info">
+      <p id="historic-header-text">Representación de todas las rutas recorridas.</p>
+      <p id="historic-sub-text">Haga click sobre la ruta que desee para saber más sobre ella.</p>
+    </div>
     <div class="map" id="historic-map"></div>
 
   </div>
@@ -71,4 +75,27 @@
 
 
 <style>
+  #historic-container {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    height: calc(100% - 56px) !important;
+  }
+
+  #historic-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #historic-header-text {
+    font-size: 1.4em;
+  }
+
+  #historic-sub-text {
+    color: gray;
+  }
+
+  #historic-map {
+    grid-row: span 4;
+  }
 </style>

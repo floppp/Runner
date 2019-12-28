@@ -1,20 +1,18 @@
 <template>
-    <div class="page-content">
-      <div class="route-info-container">
-        <div class="ri-display">
-          <div class="ri-info-title">Tiempo</div>
-          <div class="ri-info"> {{ tsToTime(time) }} </div>
-        </div>
-        <div class="ri-display">
-          <div class="ri-info-title">Distancia</div>
-          <div class="ri-info"> {{ distance.toFixed(2) }} m </div>
-        </div>
-        <div class="ri-display">
-          <div class="ri-info-title">Velocidad</div>
-          <div class="ri-info"> {{ kmh.toFixed(2) }} kmh </div>
-        </div>
-      </div>
+  <div class="route-info-container">
+    <div class="ri-display">
+      <div class="ri-info-title">Tiempo</div>
+      <div class="ri-info"> {{ tsToTime(time) }} </div>
     </div>
+    <div class="ri-display">
+      <div class="ri-info-title">Distancia</div>
+      <div class="ri-info"> {{ formatValue(distance) }} m </div>
+    </div>
+    <div class="ri-display">
+      <div class="ri-info-title">Velocidad</div>
+      <div class="ri-info"> {{ formatValue(kmh) }} kmh </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,6 +20,10 @@
     props: ['time', 'distance', 'kmh'],
 
     methods: {
+      formatValue(val) {
+        return val ? val.toFixed(2) : '';
+      },
+
       tsToTime(ts) {
         const twoDigits = n => `0${n}`.slice(-2);
 
@@ -42,6 +44,7 @@
   .route-info-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    align-self: center;
   }
 
   .ri-info-title {
