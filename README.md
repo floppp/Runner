@@ -1,2 +1,0 @@
-## Google Maps
-Para todo el tema de GoogleMaps hay algún que otro (paquete)[https://github.com/xkjyeah/vue-google-maps] con bastante tracción. De todas formas, he preferido hacerlo todo por mí mismo, eso sí, basándome en alguna clase bastante bien planteada.
