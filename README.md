@@ -1,0 +1,1 @@
+Primer proyecto hecho con Vue2, intenta emular el funcionamiento de las apps de seguimiento de salidas a correr, andar, ir en bici, etc. Funcionalidad sencilla, no probada en dispositivo real mientras se corre.
