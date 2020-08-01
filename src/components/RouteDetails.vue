@@ -19,7 +19,7 @@
   import GoogleMapsApi from '../models/GoogleMapsApi';
   import mapsModule    from '../models/maps_module';
   import RouteInfo     from './RouteInfo';
-
+  import googleapi     from '../environment';
   export default {
     name: 'RouteDetails',
 
@@ -43,7 +43,7 @@
       this.options = this.getOptions();
       
       const mapDom  = document.querySelector('#route-details-map');
-      const gmapApi = new GoogleMapsApi('AIzaSyDo2f1x-MdrQspt7wKfElzB6XIlsTXWZiw');
+      const gmapApi = new GoogleMapsApi(googlepi);
       const objRef  = this;
 
       gmapApi.load().then(() => {

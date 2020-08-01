@@ -16,11 +16,12 @@
   import GoogleMapsApi from '../models/GoogleMapsApi';
   import mapsModule    from '../models/maps_module';
   import { colors }    from '../models/utils';
+  import googlekey     from '../environment';
 
   export default {
     mounted() {
       const mapDom  = document.querySelector('#historic-map');
-      const gmapApi = new GoogleMapsApi('AIzaSyDo2f1x-MdrQspt7wKfElzB6XIlsTXWZiw');
+      const gmapApi = new GoogleMapsApi(googlekey);
       const objRef  = this;
 
       gmapApi.load().then(() => {

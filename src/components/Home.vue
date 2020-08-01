@@ -14,19 +14,20 @@
 <script>
   import GoogleMapsApi from '../models/GoogleMapsApi';
   import mapsModule    from '../models/maps_module';
+  import googlekey     from '../environment';
 
   export default {
     name: 'home',
 
     props: ['title'],
-    
+
     // Private, non-reactive.
     currentMarker: {},
     id: -1,
 
     mounted() {
       const mapDom = document.querySelector('#home-map');
-      const gmapApi = new GoogleMapsApi('AIzaSyDo2f1x-MdrQspt7wKfElzB6XIlsTXWZiw');
+      const gmapApi = new GoogleMapsApi(googlekey);
 
       gmapApi.load().then(() => {
         const mapEl = mapsModule.renderMap(mapDom, {lat: 40, lng: -1});
@@ -100,4 +101,3 @@ n con longitud y latitud detectada por el dispositivo
 </style>display: grid;
     grid-template-rows: repeat(6, 1fr);
 }
-
