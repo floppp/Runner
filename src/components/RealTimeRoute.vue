@@ -50,6 +50,7 @@
   import mapsModule    from '../models/maps_module';
   import Position      from '../models/position';
   import Route         from '../models/route';
+  import googlekey     from '../environment';
 
 
   export default {
@@ -70,7 +71,7 @@
 
     mounted() {
       const mapDom  = document.querySelector('#real-time-map');
-      const gmapApi = new GoogleMapsApi('AIzaSyDo2f1x-MdrQspt7wKfElzB6XIlsTXWZiw');
+      const gmapApi = new GoogleMapsApi(googlekey);
       const options = {
         enableHighAccuracy: false,
         maximumAge        : 0,
